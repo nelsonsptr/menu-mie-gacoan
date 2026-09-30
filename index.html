@@ -13,10 +13,8 @@
       <img src="https://antiribet.miegacoan.id/background/Logo-.png" alt="logo" class="logo" style="width: 80px; height: auto;">
     </header>
 
-    <!-- Kontainer Utama -->
+    <!-- nav menu -->
     <div class="main-container">
-
-        <!-- Navigasi Kategori Menu -->
         <nav class="nav-kategori no-scrollbar" aria-label="Kategori Menu">
             <button onclick="filterMenu('Semua')" class="btn-filter active">
                 Semua Menu
@@ -32,15 +30,11 @@
             </button>
         </nav>
 
-        <!-- Layout Utama: Grid Produk & Sidebar Keranjang -->
+        <!-- Main: barisan product card dan keranjang -->
         <main class="main-layout">
-            
             <!-- Grid Produk -->
-            <section id="menu-grid" class="menu-grid">
-                <!-- Diisi otomatis oleh JavaScript -->
-            </section>
-
-            <!-- Sidebar Keranjang Belanja -->
+            <section id="menu-grid" class="menu-grid"></section>
+            <!-- kotak keranjang -->
             <aside class="sidebar-cart">
                 <div class="cart-box">
                     <div class="cart-header">
@@ -49,13 +43,9 @@
                             Kosongkan
                         </button>
                     </div>
-
-                    <!-- List Item Keranjang -->
-                    <ul id="cart-list" class="cart-list">
-                        <!-- Diisi otomatis oleh JS -->
-                    </ul>
-
-                    <!-- Ringkasan & Tombol Checkout -->
+                    <!-- list keranjang, diisi js -->
+                    <ul id="cart-list" class="cart-list"></ul>
+                    <!-- isi keranjang dan checkout -->
                     <div class="cart-summary">
                         <div class="summary-row text-sm">
                             <span>Total Jumlah Porsi:</span>
@@ -65,27 +55,24 @@
                             <span>Total Pembayaran:</span>
                             <span id="cart-total" class="summary-total">Rp 0</span>
                         </div>
-
-                        <!-- Tombol Checkout -->
+                        <!-- checkout -->
                         <button onclick="checkout()" class="btn-checkout">
                             <span>Pesan Sekarang</span>
                             <span>➔</span>
                         </button>
-
-                        <!-- Pesan Sukses -->
+                        <!-- sukses -->
                         <div id="order-message" class="order-message hidden">
                             Terima Kasih Atas Pembelian Anda!
                         </div>
                     </div>
                 </div>
             </aside>
-
         </main>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
-        <p class="copyright">&copy; 2026 Mie Gacoan Indonesia. All rights reserved.</p>
+        <p class="copyright">Nelson Saputra - D1041241003 - Pemrograman Web D</p>
+        <p class="copyright">&copy; Mie Gacoan.</p>
         <p class="address">Jl. Khatulistiwa No.300a, Siantan Hilir, Kec. Pontianak Utara, Kota Pontianak, Kalimantan Barat 78243</p>
     </footer>
 
