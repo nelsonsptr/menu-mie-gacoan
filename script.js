@@ -209,12 +209,8 @@ function getPrice(item, level = 1) {
 function renderMenu() {
   const grid = document.getElementById("menu-grid");
   const items =
-    currentCategory === "Semua"
-      ? menuData
-      : menuData.filter((i) => i.category === currentCategory);
-
-  grid.innerHTML = items
-    .map((item) => {
+  currentCategory === "Semua" ? menuData : menuData.filter((i) => i.category === currentCategory);
+  grid.innerHTML = items.map((item) => {
       const initialPrice = item.hasLevel ? getPrice(item, 1) : item.price;
       const levelSelectHtml = item.hasLevel
         ? `
@@ -328,7 +324,6 @@ function updateCartUI() {
   let totalPrice = 0;
   let totalCount = 0;
   const keys = Object.keys(cart);
-
   if (keys.length === 0) {
     list.innerHTML = `<li class="cart-empty">Keranjang masih kosong.<br>Pilih menu favoritmu!</li>`;
     document.getElementById("cart-total").textContent = "Rp 0";
@@ -345,11 +340,7 @@ function updateCartUI() {
       const subtotal = itemPrice * cartItem.qty;
       totalPrice += subtotal;
       totalCount += cartItem.qty;
-      const levelTag =
-        cartItem.level !== null
-          ? ` <span class="cart-item-level">(Lvl ${cartItem.level})</span>`
-          : "";
-
+      const levelTag = cartItem.level !== null ? ` <span class="cart-item-level">(Lvl ${cartItem.level})</span>` : "";
       return `
             <li class="cart-item">
                 <div class="cart-item-info">
@@ -365,8 +356,7 @@ function updateCartUI() {
         `;
     })
     .join("");
-  document.getElementById("cart-total").textContent =
-    `Rp ${totalPrice.toLocaleString("id-ID")}`;
+  document.getElementById("cart-total").textContent = `Rp ${totalPrice.toLocaleString("id-ID")}`;
   document.getElementById("cart-count").textContent = `${totalCount} Porsi`;
 }
 
