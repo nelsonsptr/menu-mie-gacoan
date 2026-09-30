@@ -4,78 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Mie Gacoan</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-[#fff8e7] text-slate-800 font-sans min-h-screen flex flex-col">
+<body>
 
-    <!-- header -->
-    <header class="bg-[#17308f] py-4 px-4">
-      <img src="https://antiribet.miegacoan.id/background/Logo-.png" alt="logo" class="w-13 h-12 object-contain">
+    <!-- Header -->
+    <header class="header">
+      <img src="https://antiribet.miegacoan.id/background/Logo-.png" alt="logo" class="logo" style="width: 80px; height: auto;">
     </header>
 
-    <!-- kontainer utama -->
-    <div class="max-w-6xl mx-auto px-4 py-6 w-full flex-grow flex flex-col gap-6">
+    <!-- Kontainer Utama -->
+    <div class="main-container">
 
-        <!-- navbar menu -->
-        <nav class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar" aria-label="Kategori Menu">
-            <button onclick="filterMenu('Semua')" class="btn-filter bg-[#ec008c] text-white border-2 border-[#ec008c] text-xs font-bold px-5 py-2.5 rounded-full shadow-sm transition-all duration-200">
+        <!-- Navigasi Kategori Menu -->
+        <nav class="nav-kategori no-scrollbar" aria-label="Kategori Menu">
+            <button onclick="filterMenu('Semua')" class="btn-filter active">
                 Semua Menu
             </button>
-            <button onclick="filterMenu('Mie')" class="btn-filter bg-white text-slate-700 border-2 border-[#ec008c] hover:bg-[#ec008c] hover:text-white text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-200">
+            <button onclick="filterMenu('Mie')" class="btn-filter">
                 Mie
             </button>
-            <button onclick="filterMenu('Dimsum')" class="btn-filter bg-white text-slate-700 border-2 border-[#ec008c] hover:bg-[#ec008c] hover:text-white text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-200">
+            <button onclick="filterMenu('Dimsum')" class="btn-filter">
                 Dimsum
             </button>
-            <button onclick="filterMenu('Minuman')" class="btn-filter bg-white text-slate-700 border-2 border-[#ec008c] hover:bg-[#ec008c] hover:text-white text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-200">
+            <button onclick="filterMenu('Minuman')" class="btn-filter">
                 Minuman
             </button>
         </nav>
 
-        <!-- layout product card sama keranjang -->
-        <main class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+        <!-- Layout Utama: Grid Produk & Sidebar Keranjang -->
+        <main class="main-layout">
             
-            <!-- product card -->
-            <section id="menu-grid" class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <!-- Grid Produk -->
+            <section id="menu-grid" class="menu-grid">
                 <!-- Diisi otomatis oleh JavaScript -->
             </section>
 
-            <!-- Sidebar Keranjang Belanja Sejajar Card Atas -->
-            <aside class="lg:col-span-1">
-                <div class="bg-white border-2 border-slate-200/80 rounded-2xl p-5 shadow-sm">
-                    <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-                        <div class="flex items-center gap-2">
-                            <h2 class="font-extrabold text-[#17308f] text-base">Keranjang Pesanan</h2>
-                        </div>
-                        <button onclick="resetCart()" class="text-xs text-slate-400 hover:text-[#ec008c] transition underline font-medium">
+            <!-- Sidebar Keranjang Belanja -->
+            <aside class="sidebar-cart">
+                <div class="cart-box">
+                    <div class="cart-header">
+                        <h2>Keranjang Pesanan</h2>
+                        <button onclick="resetCart()" class="btn-reset">
                             Kosongkan
                         </button>
                     </div>
 
                     <!-- List Item Keranjang -->
-                    <ul id="cart-list" class="divide-y divide-slate-100 my-3 max-h-72 overflow-y-auto pr-1">
-                        <!-- Populated dynamically by JS -->
+                    <ul id="cart-list" class="cart-list">
+                        <!-- Diisi otomatis oleh JS -->
                     </ul>
 
-                    <!-- Summary & Tombol Checkout -->
-                    <div class="pt-4 border-t border-slate-100 space-y-3">
-                        <div class="flex justify-between items-center text-xs text-slate-500 font-medium">
+                    <!-- Ringkasan & Tombol Checkout -->
+                    <div class="cart-summary">
+                        <div class="summary-row text-sm">
                             <span>Total Jumlah Porsi:</span>
-                            <span id="cart-count" class="font-bold text-slate-800">0 Porsi</span>
+                            <span id="cart-count" class="summary-val-bold">0 Porsi</span>
                         </div>
-                        <div class="flex justify-between items-center text-sm font-bold text-slate-800">
+                        <div class="summary-row text-lg">
                             <span>Total Pembayaran:</span>
-                            <span id="cart-total" class="text-[#17308f] text-lg font-black">Rp 0</span>
+                            <span id="cart-total" class="summary-total">Rp 0</span>
                         </div>
 
-                        <!-- Tombol Checkout Utama (#ec008c) -->
-                        <button onclick="checkout()" class="w-full bg-[#ec008c] hover:bg-[#c40074] text-white font-extrabold text-xs py-3.5 px-4 rounded-xl shadow-md hover:shadow-lg transition active:scale-[0.90] flex items-center justify-center gap-2">
+                        <!-- Tombol Checkout -->
+                        <button onclick="checkout()" class="btn-checkout">
                             <span>Pesan Sekarang</span>
                             <span>➔</span>
                         </button>
 
                         <!-- Pesan Sukses -->
-                        <div id="order-message" class="hidden p-3 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs rounded-xl text-center font-bold animate-fade-in">
+                        <div id="order-message" class="order-message hidden">
                             Terima Kasih Atas Pembelian Anda!
                         </div>
                     </div>
@@ -86,9 +84,9 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-[#17308f] text-blue-100 text-center text-xs py-5 mt-auto border-t border-blue-900">
-        <p class="font-medium">&copy; 2026 Mie Gacoan Indonesia. All rights reserved.</p>
-        <p class="font-small">Jl. Khatulistiwa No.300a, Siantan Hilir, Kec. Pontianak Utara, Kota Pontianak, Kalimantan Barat 78243</p>
+    <footer class="footer">
+        <p class="copyright">&copy; 2026 Mie Gacoan Indonesia. All rights reserved.</p>
+        <p class="address">Jl. Khatulistiwa No.300a, Siantan Hilir, Kec. Pontianak Utara, Kota Pontianak, Kalimantan Barat 78243</p>
     </footer>
 
     <script src="script.js"></script>

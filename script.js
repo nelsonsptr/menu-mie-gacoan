@@ -194,7 +194,7 @@ const menuData = [
   },
 ];
 
-// Menyimpan item keranjang belanja: { key: { id, level, qty } }
+// Item keranjang belanja
 let cart = {};
 let currentCategory = "Semua";
 
@@ -215,15 +215,13 @@ function renderMenu() {
 
   grid.innerHTML = items
     .map((item) => {
-      // Harga awal yang ditunjukkan (Default Level 1 jika ada level)
       const initialPrice = item.hasLevel ? getPrice(item, 1) : item.price;
 
-      // HTML dropdown level pedas
       const levelSelectHtml = item.hasLevel
         ? `
-                <div class="mt-3 flex items-center justify-between bg-slate-50 p-2 rounded-xl border border-slate-200 text-xs">
-                    <label for="level-${item.id}" class="font-bold text-slate-600">Level Pedas:</label>
-                    <select id="level-${item.id}" onchange="updateCardPrice(${item.id})" class="bg-white border border-slate-300 font-bold text-slate-800 rounded-lg px-2 py-1 focus:outline-none focus:border-[#ec008c]">
+                <div class="level-container">
+                    <label for="level-${item.id}">Level Pedas:</label>
+                    <select id="level-${item.id}" onchange="updateCardPrice(${item.id})">
                         <option value="0">Lvl 0 (Rp 10.500)</option>
                         <option value="1" selected>Lvl 1 (Rp 10.500)</option>
                         <option value="2">Lvl 2 (Rp 10.900)</option>
@@ -239,22 +237,22 @@ function renderMenu() {
         : "";
 
       return `
-                <article class="bg-white rounded-2xl border-2 border-slate-200/70 overflow-hidden flex flex-col justify-between p-4 hover:shadow-md transition-shadow">
+                <article class="card-produk">
                     <div>
-                        <div class="relative rounded-xl overflow-hidden bg-slate-100 h-40">
-                            <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x250/17308f/ffffff?text=${encodeURIComponent(item.name)}'">
+                        <div class="card-img-wrapper">
+                            <img src="${item.img}" alt="${item.name}" onerror="this.src='https://placehold.co/400x250/17308f/ffffff?text=${encodeURIComponent(item.name)}'">
                         </div>
-                        <div class="mt-3.5">
-                            <h3 class="font-extrabold text-slate-800 text-base">${item.name}</h3>
-                            <p class="text-slate-500 text-xs mt-1 line-clamp-2 leading-relaxed">${item.desc}</p>
+                        <div>
+                            <h3 class="card-title">${item.name}</h3>
+                            <p class="card-desc">${item.desc}</p>
                         </div>
                         ${levelSelectHtml}
                     </div>
-                    <div class="flex items-center justify-between mt-4 pt-3 border-t border-slate-100">
-                        <span id="price-display-${item.id}" class="font-black text-[#17308f] text-base">
+                    <div class="card-footer">
+                        <span id="price-display-${item.id}" class="card-price">
                             Rp ${initialPrice.toLocaleString("id-ID")}
                         </span>
-                        <button onclick="addToCart(${item.id})" class="border-2 border-[#ec008c] text-[#ec008c] hover:bg-[#ec008c] hover:text-white text-xs font-extrabold px-3.5 py-1.5 rounded-xl transition-colors active:scale-95 flex items-center gap-1">
+                        <button onclick="addToCart(${item.id})" class="btn-add">
                             <span>+ Tambah</span>
                         </button>
                     </div>
@@ -264,15 +262,13 @@ function renderMenu() {
     .join("");
 }
 
-// Memperbarui tampilan harga pada kartu produk saat pilihan level diubah
+// Update tampilan harga kartu saat pilihan level diubah
 function updateCardPrice(id) {
   const item = menuData.find((m) => m.id === id);
   if (!item || !item.hasLevel) return;
-
   const levelSelect = document.getElementById(`level-${id}`);
   const level = parseInt(levelSelect.value);
   const price = getPrice(item, level);
-
   const priceDisplay = document.getElementById(`price-display-${id}`);
   if (priceDisplay) {
     priceDisplay.textContent = `Rp ${price.toLocaleString("id-ID")}`;
@@ -286,9 +282,11 @@ function filterMenu(category) {
     const isActive =
       (category === "Semua" && text.includes("Semua")) ||
       text.includes(category);
-    btn.className = isActive
-      ? "btn-filter bg-[#ec008c] text-white border-2 border-[#ec008c] text-xs font-bold px-5 py-2.5 rounded-full shadow-sm transition-all duration-200"
-      : "btn-filter bg-white text-slate-700 border-2 border-[#ec008c] hover:bg-[#ec008c] hover:text-white text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-200";
+    if (isActive) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
   });
   renderMenu();
 }
@@ -296,22 +294,18 @@ function filterMenu(category) {
 function addToCart(id) {
   const item = menuData.find((m) => m.id === id);
   if (!item) return;
-
   let level = null;
   let key = `${id}`;
-
   if (item.hasLevel) {
     const levelSelect = document.getElementById(`level-${id}`);
     level = parseInt(levelSelect.value);
     key = `${id}_lv${level}`;
   }
-
   if (cart[key]) {
     cart[key].qty += 1;
   } else {
     cart[key] = { id: item.id, level: level, qty: 1 };
   }
-
   updateCartUI();
 }
 
@@ -337,7 +331,7 @@ function updateCartUI() {
   const keys = Object.keys(cart);
 
   if (keys.length === 0) {
-    list.innerHTML = `<li class="py-8 text-center text-slate-400 text-xs font-medium">Keranjang masih kosong.<br>Pilih menu favoritmu!</li>`;
+    list.innerHTML = `<li class="cart-empty">Keranjang masih kosong.<br>Pilih menu favoritmu!</li>`;
     document.getElementById("cart-total").textContent = "Rp 0";
     document.getElementById("cart-count").textContent = "0 Porsi";
     return;
@@ -348,33 +342,30 @@ function updateCartUI() {
       const cartItem = cart[key];
       const item = menuData.find((m) => m.id === cartItem.id);
       if (!item) return "";
-
       const itemPrice = getPrice(item, cartItem.level);
       const subtotal = itemPrice * cartItem.qty;
       totalPrice += subtotal;
       totalCount += cartItem.qty;
-
       const levelTag =
         cartItem.level !== null
-          ? ` <span class="text-[#ec008c] font-bold">(Lvl ${cartItem.level})</span>`
+          ? ` <span class="cart-item-level">(Lvl ${cartItem.level})</span>`
           : "";
 
       return `
-            <li class="py-3 flex items-center justify-between text-xs border-b border-slate-100 last:border-b-0">
-                <div class="pr-2">
-                    <p class="font-bold text-slate-800">${item.name}${levelTag}</p>
-                    <p class="text-slate-400 text-[11px]">Rp ${itemPrice.toLocaleString("id-ID")}</p>
+            <li class="cart-item">
+                <div class="cart-item-info">
+                    <p class="title">${item.name}${levelTag}</p>
+                    <p class="price">Rp ${itemPrice.toLocaleString("id-ID")}</p>
                 </div>
-                <div class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 px-2 py-1 rounded-lg">
-                    <button onclick="changeQty('${key}', -1)" class="text-[#ec008c] hover:text-rose-700 font-extrabold px-1 transition">-</button>
-                    <span class="font-bold text-slate-800 min-w-[16px] text-center">${cartItem.qty}</span>
-                    <button onclick="changeQty('${key}', 1)" class="text-[#ec008c] hover:text-rose-700 font-extrabold px-1 transition">+</button>
+                <div class="qty-control">
+                    <button onclick="changeQty('${key}', -1)" class="qty-btn">-</button>
+                    <span class="qty-num">${cartItem.qty}</span>
+                    <button onclick="changeQty('${key}', 1)" class="qty-btn">+</button>
                 </div>
             </li>
         `;
     })
     .join("");
-
   document.getElementById("cart-total").textContent =
     `Rp ${totalPrice.toLocaleString("id-ID")}`;
   document.getElementById("cart-count").textContent = `${totalCount} Porsi`;
@@ -389,7 +380,7 @@ function checkout() {
   setTimeout(() => msg.classList.add("hidden"), 4000);
 }
 
-// Inisialisasi aplikasi saat halaman dimuat
+// selalu muncul saat dibuka web nya
 window.onload = function () {
   renderMenu();
   updateCartUI();

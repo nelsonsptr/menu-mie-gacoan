@@ -1,0 +1,473 @@
+/* Reset CSS Dasar */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #fff8e7;
+  color: #334155;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  background-color: #17308f;
+  padding: 1rem;
+}
+
+.logo {
+  width: 52px;
+  height: 48px;
+  object-fit: contain;
+}
+
+/* Pembungkus Utama */
+.main-container {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Navigasi Kategori */
+.nav-kategori {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+/* Sembunyikan scrollbar navigasi */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Tombol Filter */
+.btn-filter {
+  background-color: #ffffff;
+  color: #334155;
+  border: 2px solid #ec008c;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.625rem 1.25rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-filter:hover {
+  background-color: #ec008c;
+  color: #ffffff;
+}
+
+.btn-filter.active {
+  background-color: #ec008c;
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Layout Utama (Grid Desktop & Mobile) */
+.main-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .main-layout {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* Grid Kartu Produk */
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Kartu Produk (Product Card) */
+.card-produk {
+  background-color: #ffffff;
+  border: 2px solid rgba(226, 232, 240, 0.8);
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.card-produk:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-wrapper {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: #f1f5f9;
+  height: 10rem;
+}
+
+.card-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-title {
+  font-weight: 800;
+  color: #1e293b;
+  font-size: 1rem;
+  margin-top: 0.875rem;
+}
+
+.card-desc {
+  color: #64748b;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Container Dropdown Level Pedas */
+.level-container {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f8fafc;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  font-size: 0.75rem;
+}
+
+.level-container label {
+  font-weight: 700;
+  color: #475569;
+}
+
+.level-container select {
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  font-weight: 700;
+  color: #1e293b;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  outline: none;
+}
+
+.level-container select:focus {
+  border-color: #ec008c;
+}
+
+/* Footer Kartu Produk */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.card-price {
+  font-weight: 900;
+  color: #17308f;
+  font-size: 1rem;
+}
+
+.btn-add {
+  border: 2px solid #ec008c;
+  color: #ec008c;
+  background-color: transparent;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.375rem 0.875rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.btn-add:hover {
+  background-color: #ec008c;
+  color: #ffffff;
+}
+
+.btn-add:active {
+  transform: scale(0.95);
+}
+
+/* Sidebar Keranjang Belanja */
+.cart-box {
+  background-color: #ffffff;
+  border: 2px solid rgba(226, 232, 240, 0.8);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 1.5rem;
+}
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.cart-header h2 {
+  font-weight: 800;
+  color: #17308f;
+  font-size: 1rem;
+}
+
+.btn-reset {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.btn-reset:hover {
+  color: #ec008c;
+}
+
+/* Item List Keranjang */
+.cart-list {
+  list-style: none;
+  margin: 0.75rem 0;
+  max-height: 18rem;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.cart-empty {
+  padding: 2rem 0;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.cart-item {
+  padding: 0.75rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item-info .title {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.cart-item-info .price {
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.cart-item-level {
+  color: #ec008c;
+  font-weight: 700;
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.qty-btn {
+  background: none;
+  border: none;
+  color: #ec008c;
+  font-weight: 800;
+  padding: 0 0.25rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.qty-btn:hover {
+  color: #be123c;
+}
+
+.qty-num {
+  font-weight: 700;
+  color: #1e293b;
+  min-width: 16px;
+  text-align: center;
+}
+
+/* Ringkasan Keranjang & Checkout */
+.cart-summary {
+  padding-top: 1rem;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-row.text-sm {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.summary-row.text-lg {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.summary-val-bold {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.summary-total {
+  color: #17308f;
+  font-size: 1.125rem;
+  font-weight: 900;
+}
+
+/* Tombol Checkout */
+.btn-checkout {
+  width: 100%;
+  background-color: #ec008c;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.75rem;
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  border: none;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-checkout:hover {
+  background-color: #c40074;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-checkout:active {
+  transform: scale(0.9);
+}
+
+/* Notifikasi Pesanan Sukses */
+.order-message {
+  padding: 0.75rem;
+  background-color: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #047857;
+  font-size: 0.75rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  font-weight: 700;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Class Helper */
+.hidden {
+  display: none !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Footer */
+.footer {
+  background-color: #17308f;
+  color: #dbeafe;
+  text-align: center;
+  font-size: 0.75rem;
+  padding: 1.25rem 1rem;
+  margin-top: auto;
+  border-top: 1px solid #1e3a8a;
+}
+
+.footer .copyright {
+  font-weight: 500;
+}
+
+.footer .address {
+  font-size: 0.7rem;
+  margin-top: 0.25rem;
+  opacity: 0.8;
+}
