@@ -216,7 +216,6 @@ function renderMenu() {
   grid.innerHTML = items
     .map((item) => {
       const initialPrice = item.hasLevel ? getPrice(item, 1) : item.price;
-
       const levelSelectHtml = item.hasLevel
         ? `
                 <div class="level-container">
