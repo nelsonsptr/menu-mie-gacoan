@@ -208,8 +208,7 @@ function getPrice(item, level = 1) {
 
 function renderMenu() {
   const grid = document.getElementById("menu-grid");
-  const items =
-  currentCategory === "Semua" ? menuData : menuData.filter((i) => i.category === currentCategory);
+  const items = currentCategory === "Semua" ? menuData : menuData.filter((i) => i.category === currentCategory);
   grid.innerHTML = items.map((item) => {
       const initialPrice = item.hasLevel ? getPrice(item, 1) : item.price;
       const levelSelectHtml = item.hasLevel
@@ -324,15 +323,15 @@ function updateCartUI() {
   let totalPrice = 0;
   let totalCount = 0;
   const keys = Object.keys(cart);
+  // Kalo kosong
   if (keys.length === 0) {
     list.innerHTML = `<li class="cart-empty">Keranjang masih kosong.<br>Pilih menu favoritmu!</li>`;
     document.getElementById("cart-total").textContent = "Rp 0";
     document.getElementById("cart-count").textContent = "0 Porsi";
     return;
   }
-
-  list.innerHTML = keys
-    .map((key) => {
+  // Kalo isinya ada
+  list.innerHTML = keys.map((key) => {
       const cartItem = cart[key];
       const item = menuData.find((m) => m.id === cartItem.id);
       if (!item) return "";
