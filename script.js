@@ -1,4 +1,4 @@
-// Data Produk Resmi Mie Gacoan
+// Data Produk Mie Gacoan
 const menuData = [
   // Mie
   {
